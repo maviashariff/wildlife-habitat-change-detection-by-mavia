@@ -33,8 +33,8 @@ def detect():
     if not before_image or not after_image:
         return "Both images are required", 400
 
-    before_name = secure_filename(before_image.filename)
-    after_name = secure_filename(after_image.filename)
+    before_name = "before_" + secure_filename(before_image.filename)
+    after_name = "after_" + secure_filename(after_image.filename)
 
     before_path = os.path.join(app.config["UPLOAD_FOLDER"], before_name)
     after_path = os.path.join(app.config["UPLOAD_FOLDER"], after_name)
@@ -54,8 +54,8 @@ def detect():
     before_path, after_path, result_path
     )
     # Save copies of original images into results folder
-    before_result_name = f"before_{before_name}"
-    after_result_name = f"after_{after_name}"
+    before_result_name = before_name
+    after_result_name = after_name
 
     before_result_path = os.path.join(app.config["RESULT_FOLDER"], before_result_name)
     after_result_path = os.path.join(app.config["RESULT_FOLDER"], after_result_name)
